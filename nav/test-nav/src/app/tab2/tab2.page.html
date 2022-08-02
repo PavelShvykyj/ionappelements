@@ -1,17 +1,55 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+    <ion-title> Tab 2 </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" >
+    <ion-grid class="ion-padding-top">
+      <form [formGroup]="form">
+      <ion-row>
+        <!-- header -->
+        <ion-col class="bordertop" size-md="4" offset-md="4">
+          <ion-toolbar class="headertoolbar">
+            <ion-title class="ion-text-center">
+              Fill form for sign up
+            </ion-title>
+          </ion-toolbar>
+        </ion-col>
+      </ion-row>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+      <ion-row>
+        <!-- email -->
+        <ion-col size-md="4" offset-md="4">
+          <ion-item>
+            <ion-label><ion-text color="danger">*</ion-text>Email</ion-label>
+            <ion-input
+              (ionFocus)=onInputFocus($event)
+              formControlName="email"
+              autocomplete="false"
+              clear-input="true"
+              inputmode="email"
+              placeholder="email@mydomen.com"
+              type="email"
+              #emailcontrol
+            >
+            </ion-input>
+          </ion-item>
+          <div *ngIf="!emailControl.valid && emailControl.touched">
+            <ion-text class="errortext ion-text-start ion-padding-start" color="danger"> email is incorrect </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <!-- footer -->
+        <ion-col class="borderbottom" size-md="4" offset-md="4">
+          <ion-toolbar class="headertoolbar">
+            <ion-buttons slot="end">
+              <ion-button color="primary">Submit</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-col>
+      </ion-row>
+      </form>
+    </ion-grid>
 </ion-content>
