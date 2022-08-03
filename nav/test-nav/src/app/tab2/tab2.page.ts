@@ -35,10 +35,4 @@ export class Tab2Page implements OnInit {
   ionViewDidEnter() {
     this.emailIonInput.setFocus();
   }
-
-  onInputFocus(focusEvent) {
-    focusEvent.target.getInputElement().then((el) => {
-      el.select();
-    });
-  }
 }

@@ -4,52 +4,54 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" >
-    <ion-grid class="ion-padding-top">
-      <form [formGroup]="form">
-      <ion-row>
-        <!-- header -->
-        <ion-col class="bordertop" size-md="4" offset-md="4">
-          <ion-toolbar class="headertoolbar">
-            <ion-title class="ion-text-center">
-              Fill form for sign up
-            </ion-title>
-          </ion-toolbar>
-        </ion-col>
-      </ion-row>
+<ion-content [fullscreen]="true">
+  <ion-grid class="ion-padding-top">
+    <ion-row>
+      <ion-col size-md="4" offset-md="4">
+        <app-formcontainer title="Fill form for submit">
+          <form [formGroup]="form">
+            <app-formcell label="Email">
+              <ion-input
+                appAutoselect
+                formControlName="email"
+                autocomplete="false"
+                clear-input="true"
+                inputmode="email"
+                placeholder="email@mydomen.com"
+                type="email"
+                #emailcontrol
+              >
+              </ion-input>
+            </app-formcell>
 
-      <ion-row>
-        <!-- email -->
-        <ion-col size-md="4" offset-md="4">
-          <ion-item>
-            <ion-label><ion-text color="danger">*</ion-text>Email</ion-label>
-            <ion-input
-              (ionFocus)=onInputFocus($event)
-              formControlName="email"
-              autocomplete="false"
-              clear-input="true"
-              inputmode="email"
-              placeholder="email@mydomen.com"
-              type="email"
-              #emailcontrol
-            >
-            </ion-input>
-          </ion-item>
-          <div *ngIf="!emailControl.valid && emailControl.touched">
-            <ion-text class="errortext ion-text-start ion-padding-start" color="danger"> email is incorrect </ion-text>
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <!-- footer -->
-        <ion-col class="borderbottom" size-md="4" offset-md="4">
-          <ion-toolbar class="headertoolbar">
-            <ion-buttons slot="end">
-              <ion-button color="primary">Submit</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-col>
-      </ion-row>
-      </form>
-    </ion-grid>
+            <app-formcell label="Password">
+              <ion-input
+                appAutoselect
+                formControlName="password"
+                autocomplete="false"
+                clear-input="true"
+                inputmode="password"
+                placeholder="suPer_stro123ngPass!"
+                type="password"
+              >
+              </ion-input>
+            </app-formcell>
+
+            <app-formcell label="Confirm">
+              <ion-input
+                appAutoselect
+                formControlName="passwordconfirm"
+                autocomplete="false"
+                clear-input="true"
+                inputmode="password"
+                placeholder="Confirm password"
+                type="password"
+              >
+              </ion-input>
+            </app-formcell>
+          </form>
+        </app-formcontainer>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

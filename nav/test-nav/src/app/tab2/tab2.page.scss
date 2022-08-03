@@ -1,25 +1,3 @@
-ion-toolbar.headertoolbar  {
-    --color: var(--ion-color-primary-shade) !important;
-    --background: var(--ion-color-light-tint) !important;
-    // --border-width: 2px !important;
-    // --border-color: var(--ion-color-primary-shade) !important;
-}
 
-ion-col {
-    background-color: var(--ion-color-light-tint);
-    border-left: solid 2px var(--ion-color-medium-shade);
-    border-right: solid 2px var(--ion-color-medium-shade);
-}
 
-ion-col.bordertop {
-    border-top: solid 2px var(--ion-color-medium-shade);
-}
 
-ion-col.borderbottom {
-    border-bottom: solid 2px var(--ion-color-medium-shade);
-}
-
-.errortext {
-    font-size: 0.7rem;
-    padding-top: 0.2rem;
-}
