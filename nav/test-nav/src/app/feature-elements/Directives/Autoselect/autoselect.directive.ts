@@ -8,10 +8,16 @@ export class AutoselectDirective {
   constructor() {}
 
   @HostListener('ionFocus', ['$event'])
-  public onInputFocus(focusEvent) {
+  public onIonInputFocus(focusEvent) {
     focusEvent.target.getInputElement().then((el) => {
       el.select();
     });
   }
 
+  @HostListener('Focus', ['$event'])
+  public onInputFocus(focusEvent) {
+    focusEvent.target.getInputElement().then((el) => {
+      el.select();
+    });
+  }
 }

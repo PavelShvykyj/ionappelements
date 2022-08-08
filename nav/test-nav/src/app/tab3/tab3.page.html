@@ -7,11 +7,23 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <app-indexed-area style="margin: 10px;">
+    <app-indexed-element #ie0 [areaIndex]="0">
+      <label>{{ie0.areaIndex}}</label>
+      <input #myinput>
+    </app-indexed-element>
+
+    <app-indexed-element #ie3 [areaIndex]="3">
+      <label>{{ie3.areaIndex}}</label>
+      <input #myinput>
+    </app-indexed-element>
+
+    <app-indexed-element #ie2 [areaIndex]="2">
+      <label>{{ie2.areaIndex}}</label>
+      <input #myinput>
+    </app-indexed-element>
+
+  </app-indexed-area>
+
 </ion-content>

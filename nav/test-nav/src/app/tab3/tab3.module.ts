@@ -7,6 +7,8 @@ import { Tab3Page } from './tab3.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
 import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { CustomfocusDirective } from './testdirective/customfocus.directive';
+import { IndexedAreaModule } from '../indexed-area/indexed-area.module';
 
 @NgModule({
   imports: [
@@ -16,7 +18,8 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
+    IndexedAreaModule
   ],
-  declarations: [Tab3Page]
+  declarations: [Tab3Page, CustomfocusDirective]
 })
 export class Tab3PageModule {}

@@ -1,0 +1,3 @@
+<div tabindex=0 #container (click)="onClick($event)" (keyup.enter)="onEnter($event)" (keyup.Tab)="onEnter($event)" [ngClass]="{'onedit': onEdit}" >
+    <ng-content></ng-content>
+</div>
