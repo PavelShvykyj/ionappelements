@@ -9,40 +9,49 @@
 <ion-content [fullscreen]="true">
   <div style="background-color: brown;">
   <app-indexed-area style="margin: 10px;">
-    <app-indexed-element #ie0 [areaIndex]="0">
-      <label>{{ie0.areaIndex}}</label>
-      <input #myinput>
+    <app-indexed-element #ie10 [areaIndex]="0" >
+      <label>{{ie10.areaIndex}}</label>
+      <input #myinput appAutoselect>
     </app-indexed-element>
 
-    <app-indexed-element #ie3 [areaIndex]="3">
-      <label>{{ie3.areaIndex}}</label>
-      <input #myinput>
+    <app-indexed-element #ie13 [areaIndex]="3" >
+      <label>{{ie13.areaIndex}}</label>
+      <input #myinput appAutoselect>
     </app-indexed-element>
 
-    <app-indexed-element #ie2 [areaIndex]="2">
-      <label>{{ie2.areaIndex}}</label>
-      <input #myinput>
+    <app-indexed-element #ie12 [areaIndex]="2" >
+      <label>{{ie12.areaIndex}}</label>
+      <input #myinput *ngIf="show" appAutoselect>
+      <ion-button size="small" color="medium" (click)="show = !show"> show\hide </ion-button>
     </app-indexed-element>
+
 
   </app-indexed-area>
   </div>
 <div style="background-color: bisque;">
   <app-indexed-area style="margin: 10px;">
-    <app-indexed-element #ie1 [areaIndex]="1">
-      <label>{{ie1.areaIndex}}</label>
-      <input #myinput>
+    <app-indexed-element  [areaIndex]="1">
+      <app-editable-element [contextData]="contextData" contextName="first" ></app-editable-element>
     </app-indexed-element>
 
-    <app-indexed-element #ie2 [areaIndex]="2">
-      <label>{{ie2.areaIndex}}</label>
-      <input #myinput>
+    <app-indexed-element  [areaIndex]="2">
+      <app-editable-element [contextData]="contextData" contextName="second" ></app-editable-element>
     </app-indexed-element>
 
-    <app-indexed-element #ie3 [areaIndex]="3">
-      <label>{{ie3.areaIndex}}</label>
-      <input #myinput>
+    <app-indexed-element  [areaIndex]="3">
+      <app-editable-element [contextData]="contextData" contextName="third" ></app-editable-element>
     </app-indexed-element>
 
+    <app-indexed-element *ngFor="let item of list" [areaIndex]="item">
+      <app-editable-element [contextData]="contextData" contextName="third" ></app-editable-element>
+    </app-indexed-element>
   </app-indexed-area>
+
+  <div style="padding-top: 10px;">
+    <span style="margin: 3px;">{{contextData.first}}</span>
+    <span style="margin: 3px;">{{contextData.second}}</span>
+    <span style="margin: 3px;">{{contextData.third}}</span>
+  </div>
+
 </div>
 </ion-content>

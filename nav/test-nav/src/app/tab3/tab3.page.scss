@@ -1,3 +1,13 @@
 // :focus{
 //     border: 3px solid firebrick;
 // }
+
+
+.onedit {
+    border: 2px;
+    border-style: solid;
+    border-color: var(--ion-color-medium-shade);
+    background-color: var(--ion-color-light-tint);
+    opacity: 0.8;
+    padding: 4px;
+}

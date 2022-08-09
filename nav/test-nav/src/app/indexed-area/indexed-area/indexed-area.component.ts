@@ -1,4 +1,5 @@
-import {  Component, OnInit, QueryList, Self, ViewChildren, ElementRef, ContentChildren, AfterContentInit } from '@angular/core';
+import {  Component, OnInit, QueryList, Self, ViewChildren, ElementRef, ContentChildren, AfterContentInit, HostBinding, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { IndexProcessorService } from '../index-processor.service';
 import { IndexedElementComponent } from '../indexed-element/indexed-element.component';
 
@@ -8,12 +9,16 @@ import { IndexedElementComponent } from '../indexed-element/indexed-element.comp
   styleUrls: ['./indexed-area.component.scss'],
   providers:[ IndexProcessorService]
 })
-export class IndexedAreaComponent implements OnInit, AfterContentInit {
+export class IndexedAreaComponent implements OnInit, AfterContentInit, OnDestroy {
 
   @ContentChildren(IndexedElementComponent)
   indexedElements: QueryList<IndexedElementComponent>;
 
+  private qlSubs: Subscription;
   constructor(@Self() private indexer: IndexProcessorService) { }
+
+  @HostBinding('tabindex')
+  get selfIndex() {return 0;};
 
   ngOnInit() {
     this.indexer.areaActiveGetter.subscribe(ind => {
@@ -29,8 +34,16 @@ export class IndexedAreaComponent implements OnInit, AfterContentInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.qlSubs.unsubscribe();
+  }
+
   ngAfterContentInit(): void {
     this.indexer.indexes = this.indexedElements.map(el => el.areaIndex).sort();
+    this.qlSubs = this.indexedElements.changes.subscribe(ql =>{
+      console.log('QL',ql);
+      this.indexer.indexes = ql.map(el => el.areaIndex).sort();
+    });
   }
 
   sendClick(ind) {

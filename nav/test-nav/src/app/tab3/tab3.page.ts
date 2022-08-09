@@ -6,8 +6,21 @@ import { Component, ElementRef } from '@angular/core';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  show = false;
+  contextData = {
+    first: 1,
+    second: 2,
+    third:3
+  };
 
-  constructor() {}
+  list: Array<number> = [];
+
+  constructor() {
+      for (let index = 4; index < 50; index++){
+          this.list.push(index);
+        }
+
+  }
 
   onfocus(childe: HTMLInputElement) {
     setTimeout(()=>childe.focus(), 1000) ;

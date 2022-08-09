@@ -1,0 +1,18 @@
+<ng-template #editCell let-edit="edit">
+  <input
+    #myinput
+    [(ngModel)]="edit[contextName]"
+    appAutoselect
+    class="onedit"
+    >
+</ng-template>
+
+<ng-template #wievCell let-show="show">
+    <span class="onwiev">{{show}}</span>
+</ng-template>
+
+<ng-container
+  [ngTemplateOutlet] = "OnEdit ? editCell : wievCell"
+  [ngTemplateOutletContext]="OnEdit ? {edit:contextData} : {show:contextData[contextName]}">
+</ng-container>
+

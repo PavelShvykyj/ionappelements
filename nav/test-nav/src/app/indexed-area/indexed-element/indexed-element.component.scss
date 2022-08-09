@@ -1,4 +1,8 @@
-.onedit {
+:host {
+    display: block;
+}
+
+:host .onedit {
     border: 2px;
     border-style: solid;
     border-color: var(--ion-color-medium-shade);

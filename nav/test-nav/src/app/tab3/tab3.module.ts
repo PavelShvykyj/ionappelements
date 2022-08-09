@@ -9,6 +9,8 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 import { CustomfocusDirective } from './testdirective/customfocus.directive';
 import { IndexedAreaModule } from '../indexed-area/indexed-area.module';
+import { EditableAreaModule } from '../editable-area/editable-area.module';
+import { FeatureElementsModule } from '../feature-elements/feature-elements.module';
 
 @NgModule({
   imports: [
@@ -18,7 +20,9 @@ import { IndexedAreaModule } from '../indexed-area/indexed-area.module';
     ExploreContainerComponentModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
-    IndexedAreaModule
+    IndexedAreaModule,
+    EditableAreaModule,
+    FeatureElementsModule
   ],
   declarations: [Tab3Page, CustomfocusDirective]
 })
