@@ -55,7 +55,7 @@ export class IndexedAreaComponent implements OnInit, AfterContentInit, OnDestroy
     if (next.length!==0) {
       const nextel = next[0];
       //console.log('next element',nextel);
-      const nextelonedit = nextel.onEdit;
+      //const nextelonedit = nextel.onEdit;
       //console.log('nextelonedit',nextelonedit);
         nextel.rizeClick();
     }
