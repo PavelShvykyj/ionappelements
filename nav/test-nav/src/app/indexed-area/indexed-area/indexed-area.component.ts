@@ -1,4 +1,4 @@
-import {  Component, OnInit, QueryList, Self, ViewChildren, ElementRef, ContentChildren, AfterContentInit, HostBinding, OnDestroy } from '@angular/core';
+import {  Component, OnInit, QueryList, Self, ContentChildren, AfterContentInit, HostBinding, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { IndexProcessorService } from '../index-processor.service';
 import { IndexedElementComponent } from '../indexed-element/indexed-element.component';
