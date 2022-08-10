@@ -1,49 +1,38 @@
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-
 import {
   Component,
-  ContentChild,
   ContentChildren,
   ElementRef,
   HostBinding,
   Input,
-  OnInit,
-  Self,
   SkipSelf,
-  ViewChild,
   QueryList,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { IndexProcessorService } from '../index-processor.service';
-import { EditableElementComponent } from 'src/app/editable-area/editable-element/editable-element.component';
 
 @Component({
   selector: 'app-indexed-element',
   templateUrl: './indexed-element.component.html',
   styleUrls: ['./indexed-element.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: {
     '(click)': 'onClick($event)',
-    '(keyup.enter)': 'onEditKey($event)',
-    '(keydown.tab)': 'onEditKey($event)',
   },
 })
-export class IndexedElementComponent implements OnInit {
+export class IndexedElementComponent {
+  // * собственный индекс
   @Input()
   areaIndex: number;
 
-  @ContentChildren('myinput',{descendants:false})
+  // * список подчиенных маркированны (наших) инпутов
+  @ContentChildren('myinput',{descendants:true})
   inputEl: QueryList<ElementRef>;
 
-  // qlsubs: Subscription;
+  // * получаем сервис определенный в родителе не ищем его в себе
+  constructor(@SkipSelf() private indexer: IndexProcessorService) {}
 
-  constructor(
-    @SkipSelf() private indexer: IndexProcessorService,
-    private selfRef: ElementRef
-  ) {
-    console.log('ctror IndexedElementComponent self ref', selfRef);
-  }
-
+  // * атрибут нужен так как иначе елемент не фокусируемый и не получает событий от key.tab
   @HostBinding('tabindex')
   get selfIndex() {return this.areaIndex;};
 
@@ -51,46 +40,23 @@ export class IndexedElementComponent implements OnInit {
   get onEdit() {
     return this.areaIndex === this.indexer.areaActiveGetter.value;
   }
-
-  ngOnInit() {}
-
+  // * устанавлиаем активный индес и фокусирум первый подчиненный маркированный инпут
   onClick(event) {
-    console.log('onClick', event);
-    this.indexer.areaActive = this.areaIndex;
-    if (this.inputEl.length === 0) {
-      console.error('inputEl.length', this.inputEl.length);
-      // ?may be just return
-      // *have no inputs go to next indexed element
-      //this.goNext();
-      // if (this.qlsubs) {
-      //   this.qlsubs.unsubscribe();
-      // }
-      // this.qlsubs = this.inputEl.changes.subscribe(ql=>{
-      //   console.log('QL inputs lenh ', ql.length);
-      //   ql.get(0).nativeElement.focus();
-      // });
+    if (this.onEdit) {
       return;
     }
-      console.log('inputs lenth ',this.inputEl.length);
-      this.inputEl.get(0).nativeElement.focus();
-
+    // ?console.log('onClick', event);
+    this.indexer.areaActive = this.areaIndex;
+    this.focusInput();
   }
 
-  onEditKey(event: Event) {
-    console.log('onEnter', Event);
-    event.preventDefault();
-    event.stopPropagation();
-    this.goNext();
+  focusInput() {
+    if (this.onEdit) {
+      if (this.inputEl.length !== 0) {
+        // ?console.error('inputEl.length', this.inputEl.length);
+        this.inputEl.get(0).nativeElement.focus();
+      }
+    }
   }
 
-  rizeClick() {
-    console.log('rizeClick on', this.selfRef.nativeElement);
-    //  this.selfElement.nativeElement.click();
-    this.selfRef.nativeElement.click();
-  }
-
-  goNext() {
-    console.log('GoNext');
-    this.indexer.areaActiveNext();
-  }
 }

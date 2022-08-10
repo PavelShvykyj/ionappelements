@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <div style="background-color: brown;">
   <app-indexed-area style="margin: 10px;">
-    <app-indexed-element #ie10 [areaIndex]="0" >
+    <app-indexed-element #ie10 [areaIndex]="1" >
       <label>{{ie10.areaIndex}}</label>
       <input #myinput appAutoselect>
     </app-indexed-element>
@@ -28,8 +28,23 @@
 
   </app-indexed-area>
   </div>
-<div style="background-color: bisque;">
-  <app-indexed-area style="margin: 10px;">
+
+  <div style="background-color: bisque; width: 100vw; height: 50vh; overflow: scroll;">
+  <table style="margin: 5px;">
+    <tbody>
+      <app-indexed-area style="margin: 10px;">
+        <tr *ngFor="let row of dataTable; index as i;">
+            <td *ngFor="let col of row.names; index as j;" style="margin: 2px; padding: 2px; border: 1px; min-width: 4rem;">
+              <app-indexed-element  [areaIndex]="getIndex(i,j)">
+                <app-editable-element [contextData]="row" [contextName]="col" ></app-editable-element>
+              </app-indexed-element>
+            </td>
+        </tr>
+      </app-indexed-area>
+    </tbody>
+</table>
+
+<!-- <app-indexed-area style="margin: 10px;">
     <app-indexed-element  [areaIndex]="1">
       <app-editable-element [contextData]="contextData" contextName="first" ></app-editable-element>
     </app-indexed-element>
@@ -45,7 +60,7 @@
     <app-indexed-element *ngFor="let item of list" [areaIndex]="item">
       <app-editable-element [contextData]="contextData" contextName="third" ></app-editable-element>
     </app-indexed-element>
-  </app-indexed-area>
+  </app-indexed-area> -->
 
   <div style="padding-top: 10px;">
     <span style="margin: 3px;">{{contextData.first}}</span>

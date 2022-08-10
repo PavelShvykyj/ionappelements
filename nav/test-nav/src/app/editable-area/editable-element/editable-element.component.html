@@ -3,6 +3,7 @@
     #myinput
     [(ngModel)]="edit[contextName]"
     appAutoselect
+    [type]="getInputType(edit, contextName)"
     class="onedit"
     >
 </ng-template>
