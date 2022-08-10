@@ -54,6 +54,7 @@ export class IndexedElementComponent {
     if (this.onEdit) {
       if (this.inputEl.length !== 0) {
         // ?console.error('inputEl.length', this.inputEl.length);
+        // TODO что то что сможет сфокусировать не только инпут а и мат.инпут, ионик инпут - универсально
         this.inputEl.get(0).nativeElement.focus();
       }
     }
