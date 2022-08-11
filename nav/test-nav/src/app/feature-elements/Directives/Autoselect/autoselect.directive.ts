@@ -10,7 +10,7 @@ export class AutoselectDirective {
   @HostListener('ionFocus', ['$event'])
   public onIonInputFocus(focusEvent) {
     focusEvent.target.getInputElement().then((el) => {
-      console.log('DIRECTIVE element',focusEvent.target);
+      //? console.log('DIRECTIVE element',focusEvent.target);
       el.select();
     });
   }
