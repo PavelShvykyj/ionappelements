@@ -9,25 +9,24 @@ export class IndexProcessorService {
 
   constructor() { }
 
-  get indexes() {
-    return this.indexes;
-  }
-
-  set indexes(indexes: Array<number>) {
-    // *check for duplicates
-    const unic: Set<number> = new Set(indexes);
-    if (unic.size !== indexes.length) {
-      throw new Error('Dublicate values in indexed area');
-    }
-    this.indexesInternal = indexes;
-  }
-
   set areaActive(index) {
     if (this.indexesInternal.indexOf(index) !== -1) {
       this.areaactive.next(index);
       return;
     }
     this.areaactive.next(-1);
+  }
+
+  addIndex(ind: number) {
+    if (this.indexesInternal.indexOf(ind) !== -1) {
+      throw new Error('Dublicate values in indexed area');
+    }
+    this.indexesInternal.push(ind);
+  }
+
+  removeIndex(ind: number) {
+    const inPosition = this.indexesInternal.indexOf(ind);
+    this.indexesInternal.splice(inPosition,1);
   }
 
   areaActiveNext() {

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef } from '@angular/core';
 
+
 @Component({
   selector: 'app-tab3',
   templateUrl: 'tab3.page.html',
@@ -17,10 +18,11 @@ export class Tab3Page {
   dataTable: Array<{[key: string]: any}> = [];
 
 
+  password: string;
   list: Array<number> = [];
 
   constructor() {
-      for (let indexrow = 1; indexrow <= 20; indexrow++){
+      for (let indexrow = 1; indexrow <= 10; indexrow++){
         const row: {[key: string]: any}  = {names: []};
         for (let colindex = 1; colindex <= 10; colindex++) {
               const name = 'r'+indexrow+''+colindex;

@@ -1,13 +1,16 @@
 import {
   Component,
   ContentChildren,
-  ElementRef,
   HostBinding,
   Input,
   SkipSelf,
   QueryList,
   ChangeDetectionStrategy,
+  OnDestroy,
+  OnInit,
+  AfterContentInit,
 } from '@angular/core';
+import { FocusableDirective } from '../focusable.directive';
 import { IndexProcessorService } from '../index-processor.service';
 
 @Component({
@@ -20,14 +23,16 @@ import { IndexProcessorService } from '../index-processor.service';
     '(click)': 'onClick($event)',
   },
 })
-export class IndexedElementComponent {
+export class IndexedElementComponent implements OnInit, OnDestroy, AfterContentInit {
   // * собственный индекс
   @Input()
   areaIndex: number;
 
   // * список подчиенных маркированны (наших) инпутов
-  @ContentChildren('myinput',{descendants:true})
-  inputEl: QueryList<ElementRef>;
+  @ContentChildren(FocusableDirective,{descendants:true})
+  directiveEl: QueryList<FocusableDirective>;
+
+  private lastOnEdit = false;
 
   // * получаем сервис определенный в родителе не ищем его в себе
   constructor(@SkipSelf() private indexer: IndexProcessorService) {}
@@ -38,7 +43,27 @@ export class IndexedElementComponent {
 
   @HostBinding('class.onedit')
   get onEdit() {
-    return this.areaIndex === this.indexer.areaActiveGetter.value;
+    const nowOnEdit =  (this.areaIndex === this.indexer.areaActiveGetter.value);
+    const statusChanged = nowOnEdit !== this.lastOnEdit;
+    if (statusChanged) {
+      if (nowOnEdit) {
+        setTimeout((() => this.focusInput()).bind(this));
+      }
+      this.lastOnEdit = nowOnEdit;
+    }
+    return nowOnEdit;
+  }
+
+  ngOnInit(): void {
+    this.indexer.addIndex(this.areaIndex);
+  };
+
+  ngOnDestroy(): void {
+    this.indexer.removeIndex(this.areaIndex);
+  }
+
+  ngAfterContentInit(): void {
+    this.directiveEl.forEach(el => el.appFocusable = this.areaIndex);
   }
   // * устанавлиаем активный индес и фокусирум первый подчиненный маркированный инпут
   onClick(event) {
@@ -47,15 +72,15 @@ export class IndexedElementComponent {
     }
     // ?console.log('onClick', event);
     this.indexer.areaActive = this.areaIndex;
-    this.focusInput();
   }
 
   focusInput() {
+    // ?console.log('focusInput');
     if (this.onEdit) {
-      if (this.inputEl.length !== 0) {
-        // ?console.error('inputEl.length', this.inputEl.length);
+      // ?console.error('inputEl.length', this.directiveEl.length);
+      if (this.directiveEl.length !== 0) {
         // TODO что то что сможет сфокусировать не только инпут а и мат.инпут, ионик инпут - универсально
-        this.inputEl.get(0).nativeElement.focus();
+        this.directiveEl.get(0).focus = true;
       }
     }
   }

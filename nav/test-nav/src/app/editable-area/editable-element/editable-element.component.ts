@@ -59,6 +59,8 @@ export class EditableElementComponent implements OnInit {
   }
 
   getInputType(edit, editCellName: string): string {
-    return (typeof edit[editCellName]).toString();
+    const inputtype = (typeof edit[editCellName]).toString();
+    //? console.log('input type', inputtype,edit[editCellName] , edit);
+    return inputtype;
   }
 }

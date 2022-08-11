@@ -11,22 +11,38 @@
   <app-indexed-area style="margin: 10px;">
     <app-indexed-element #ie10 [areaIndex]="1" >
       <label>{{ie10.areaIndex}}</label>
-      <ion-input #myinput appAutoselect></ion-input>
-      <!-- <input #myinput  appAutoselect> -->
+      <input [appFocusable]=0 appAutoselect>
+      <!-- <ion-input appFocusable appAutoselect></ion-input> -->
     </app-indexed-element>
 
     <app-indexed-element #ie13 [areaIndex]="3" >
       <label>{{ie13.areaIndex}}</label>
-      <input #myinput appAutoselect>
+      <input [appFocusable]=0 appAutoselect>
     </app-indexed-element>
 
     <app-indexed-element #ie12 [areaIndex]="2" >
       <label>{{ie12.areaIndex}}</label>
-      <input #myinput *ngIf="show" appAutoselect>
-      <ion-button size="small" color="medium" (click)="show = !show"> show\hide </ion-button>
+      <input [appFocusable]=0 *ngIf="show" appAutoselect>
+      <ion-button [appFocusable]=0  size="small" color="medium" (click)="show = !show"> show\hide </ion-button>
     </app-indexed-element>
 
-
+    <app-indexed-element  [areaIndex]="4" >
+      <form>
+      <app-formcell  label="Password">
+      <ion-input
+        [appFocusable]=0
+        focusfunkname = "ionic"
+        appAutoselect
+        autocomplete="false"
+        clear-input="true"
+        inputmode="password"
+        placeholder="suPer_stro123ngPass!"
+        type="password"
+      >
+      </ion-input>
+    </app-formcell>
+  </form>
+    </app-indexed-element>
   </app-indexed-area>
   </div>
 

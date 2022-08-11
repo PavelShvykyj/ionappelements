@@ -6,7 +6,7 @@
 
   <ng-content></ng-content>
   <ion-text
-    *ngIf="!formControl.valid && formControl.touched"
+    *ngIf="formControl && !formControl.valid && formControl.touched"
     slot="error"
     class="errortext"
     color="danger"
