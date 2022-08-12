@@ -22,7 +22,7 @@ export class Tab3Page {
   list: Array<number> = [];
 
   constructor() {
-      for (let indexrow = 1; indexrow <= 10; indexrow++){
+      for (let indexrow = 1; indexrow <= 100; indexrow++){
         const row: {[key: string]: any}  = {names: []};
         for (let colindex = 1; colindex <= 10; colindex++) {
               const name = 'r'+indexrow+''+colindex;

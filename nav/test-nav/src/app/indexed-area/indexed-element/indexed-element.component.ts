@@ -46,6 +46,7 @@ export class IndexedElementComponent implements OnInit, OnDestroy, AfterContentI
     const nowOnEdit =  (this.areaIndex === this.indexer.areaActiveGetter.value);
     const statusChanged = nowOnEdit !== this.lastOnEdit;
     if (statusChanged) {
+      console.log('onEdit');
       if (nowOnEdit) {
         setTimeout((() => this.focusInput()).bind(this));
       }

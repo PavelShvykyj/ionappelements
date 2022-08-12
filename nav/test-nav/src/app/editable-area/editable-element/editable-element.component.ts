@@ -45,6 +45,7 @@ export class EditableElementComponent implements OnInit {
   set focusInput(el: ElementRef) {
     if (el) {
       el.nativeElement.focus();
+      el.nativeElement.type = this.getInputType(this.contextData,this.contextName);
     }
   }
 

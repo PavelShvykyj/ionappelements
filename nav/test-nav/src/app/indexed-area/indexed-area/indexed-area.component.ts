@@ -5,7 +5,11 @@ import {
   HostListener,
   ElementRef,
   ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy,
 } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import { IndexProcessorService } from '../index-processor.service';
 
 @Component({
@@ -20,8 +24,11 @@ import { IndexProcessorService } from '../index-processor.service';
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IndexedAreaComponent
+export class IndexedAreaComponent implements OnInit, OnDestroy
 {
+
+  private onEditReactor = new Subject();
+  private reactorSubs: Subscription;
 
   constructor(
     // * сервис определен в самом компоненте отмечаем что инжектор ведет поиск только
@@ -53,7 +60,17 @@ export class IndexedAreaComponent
     event.preventDefault();
     event.stopPropagation();
     // * активируем следующий индекс елемент
-    this.indexer.areaActiveNext();
+    //this.indexer.areaActiveNext();
+    this.onEditReactor.next(true);
   }
 
+  ngOnInit(): void {
+    this.reactorSubs = this.onEditReactor.pipe(debounceTime(20)).subscribe(el=> {
+      this.indexer.areaActiveNext();
+    });
+  }
+
+  ngOnDestroy(): void {
+      this.reactorSubs.unsubscribe();
+  }
 }

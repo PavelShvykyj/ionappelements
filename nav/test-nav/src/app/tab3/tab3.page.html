@@ -7,12 +7,12 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div style="background-color: brown;">
+  <!-- <div style="background-color: brown;">
   <app-indexed-area style="margin: 10px;">
     <app-indexed-element #ie10 [areaIndex]="1" >
       <label>{{ie10.areaIndex}}</label>
       <input [appFocusable]=0 appAutoselect>
-      <!-- <ion-input appFocusable appAutoselect></ion-input> -->
+      
     </app-indexed-element>
 
     <app-indexed-element #ie13 [areaIndex]="3" >
@@ -44,7 +44,7 @@
   </form>
     </app-indexed-element>
   </app-indexed-area>
-  </div>
+  </div> -->
 
   <div style="background-color: bisque; width: 100vw; height: 50vh; overflow: scroll;">
   <table style="margin: 5px;">
@@ -55,6 +55,7 @@
               <app-indexed-element  [areaIndex]="getIndex(i,j)">
                 <app-editable-element [contextData]="row" [contextName]="col" ></app-editable-element>
               </app-indexed-element>
+              <!-- <input [tabindex]="getIndex(i,j)" [(ngModel)]="dataTable[i][col]"> -->
             </td>
         </tr>
       </app-indexed-area>
