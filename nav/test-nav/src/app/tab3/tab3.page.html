@@ -7,26 +7,26 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <div style="background-color: brown;">
-  <app-indexed-area style="margin: 10px;">
+  <div style="background-color: brown; ">
+  <app-indexed-area style="margin: 10px; display: flex; align-items: center; justify-content: space-around;">
     <app-indexed-element #ie10 [areaIndex]="1" >
-      <label>{{ie10.areaIndex}}</label>
+      <label style="margin-right: 3px; color: antiquewhite;">{{ie10.areaIndex}}</label>
       <input [appFocusable]=0 appAutoselect>
       
     </app-indexed-element>
 
     <app-indexed-element #ie13 [areaIndex]="3" >
-      <label>{{ie13.areaIndex}}</label>
+      <label style="margin-right: 3px; color: antiquewhite;">{{ie13.areaIndex}}</label>
       <input [appFocusable]=0 appAutoselect>
     </app-indexed-element>
 
     <app-indexed-element #ie12 [areaIndex]="2" >
-      <label>{{ie12.areaIndex}}</label>
+      <label style="margin-right: 3px; color: antiquewhite;">{{ie12.areaIndex}}</label>
       <input [appFocusable]=0 *ngIf="show" appAutoselect>
       <ion-button [appFocusable]=0  size="small" color="medium" (click)="show = !show"> show\hide </ion-button>
     </app-indexed-element>
 
-    <app-indexed-element  [areaIndex]="4" >
+    <app-indexed-element style="margin-top: 4px;" [areaIndex]="4" >
       <form>
       <app-formcell  label="Password">
       <ion-input
@@ -44,16 +44,16 @@
   </form>
     </app-indexed-element>
   </app-indexed-area>
-  </div> -->
+  </div>
 
   <div style="background-color: bisque; width: 100vw; height: 50vh; overflow: scroll;">
   <table style="margin: 5px;">
     <tbody>
       <app-indexed-area style="margin: 10px;">
         <tr *ngFor="let row of dataTable; index as i;">
-            <td *ngFor="let col of row.names; index as j;" style="margin: 2px; padding: 2px; border: 1px; min-width: 4rem;">
+            <td style="width: 50px;" *ngFor="let col of row.names; index as j;" style="margin: 2px; padding: 2px; border: 1px; min-width: 4rem;">
               <app-indexed-element  [areaIndex]="getIndex(i,j)">
-                <app-editable-element [contextData]="row" [contextName]="col" ></app-editable-element>
+                <app-editable-element focusfunkname = "editable"  [appFocusable]=0 [contextData]="row" [contextName]="col" ></app-editable-element>
               </app-indexed-element>
               <!-- <input [tabindex]="getIndex(i,j)" [(ngModel)]="dataTable[i][col]"> -->
             </td>

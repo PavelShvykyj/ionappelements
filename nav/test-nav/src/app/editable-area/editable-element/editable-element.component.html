@@ -13,7 +13,7 @@
 </ng-template>
 
 <ng-container
-  [ngTemplateOutlet] = "OnEdit ? editCell : wievCell"
-  [ngTemplateOutletContext]="OnEdit ? {edit:contextData} : {show:contextData[contextName]}">
+  [ngTemplateOutlet] = "onEdit ? editCell : wievCell"
+  [ngTemplateOutletContext]="onEdit ? {edit:contextData} : {show:contextData[contextName]}">
 </ng-container>
 

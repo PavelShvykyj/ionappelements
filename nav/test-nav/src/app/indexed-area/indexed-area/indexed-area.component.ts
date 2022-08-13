@@ -65,7 +65,8 @@ export class IndexedAreaComponent implements OnInit, OnDestroy
   }
 
   ngOnInit(): void {
-    this.reactorSubs = this.onEditReactor.pipe(debounceTime(20)).subscribe(el=> {
+    this.reactorSubs = this.onEditReactor.pipe(debounceTime(30)).subscribe(el=> {
+      // ?console.log('next index');
       this.indexer.areaActiveNext();
     });
   }

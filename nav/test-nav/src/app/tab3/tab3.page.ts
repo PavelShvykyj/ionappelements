@@ -22,10 +22,10 @@ export class Tab3Page {
   list: Array<number> = [];
 
   constructor() {
-      for (let indexrow = 1; indexrow <= 100; indexrow++){
+      for (let indexrow = 0; indexrow <= 9; indexrow++){
         const row: {[key: string]: any}  = {names: []};
-        for (let colindex = 1; colindex <= 10; colindex++) {
-              const name = 'r'+indexrow+''+colindex;
+        for (let colindex = 0; colindex <= 9; colindex++) {
+              const name = 'c'+colindex;
               row.names.push(name);
               row[name] = this.getIndex(indexrow,colindex);
           }

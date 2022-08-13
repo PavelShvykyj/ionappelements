@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostBinding, Inject, Input } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, HostBinding, Inject, Input, Output } from '@angular/core';
 import { focusfunctions } from './focusable-functions/focusable-functions';
 
 @Directive({
@@ -9,7 +9,9 @@ export class FocusableDirective {
   @Input()
   appFocusable = 0;
 
-  private focusfunk: (el: any) => void;
+  @Output() customFocus: EventEmitter<any> = new EventEmitter();
+
+  focusfunk: (el: any, evetn?: EventEmitter<any>, value?: any) => void;
 
   constructor(@Inject(ElementRef) private element: ElementRef) {
     this.focusfunkname = 'native';
@@ -17,11 +19,11 @@ export class FocusableDirective {
 
   @Input()
   set focusfunkname(name) {
-    this.focusfunk = focusfunctions[name];
+    this.focusfunk = focusfunctions[name].bind(this);
   };
 
   public set focus(onfocus: boolean) {
-    //? console.log(this.element.nativeElement);
-    this.focusfunk(this.element);
+    // ? console.log('DIRECTIVE focus on',this.element.nativeElement);
+    this.focusfunk(this.element,this.customFocus,onfocus);
   }
 }

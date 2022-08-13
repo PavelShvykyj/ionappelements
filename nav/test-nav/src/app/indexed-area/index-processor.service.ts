@@ -32,6 +32,7 @@ export class IndexProcessorService {
   areaActiveNext() {
     const current = this.areaactive.value;
     const next = this.indexesInternal.indexOf(current)+1;
+    // ? console.log('next',this.indexesInternal[next]);
     this.areaactive.next(this.indexesInternal[next>this.indexesInternal.length-1 ? 0 : next]);
   }
 }
