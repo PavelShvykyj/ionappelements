@@ -1,13 +1,30 @@
-import { Injectable, QueryList } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, OnDestroy,  } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { filter} from 'rxjs/operators';
+import { FocusableDirective } from './focusable.directive';
 @Injectable()
-export class IndexProcessorService {
-  private indexesInternal: Array<number> = [];
-  private areaactive = new BehaviorSubject<number>(-1);
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  public readonly areaActiveGetter = this.areaactive;
+export class IndexProcessorService implements OnDestroy {
 
-  constructor() { }
+  private indexesInternal: Array<number> = [];
+  private indexedElements: {[key: number]: FocusableDirective} = {};
+  private idexersubs: Subscription;
+  private areaactive = new BehaviorSubject<number>(-1);
+  private lastOnEdit = -1;
+  // // eslint-disable-next-line @typescript-eslint/member-ordering
+  // public readonly areaActiveGetter = this.areaactive;
+
+  constructor() {
+    this.idexersubs = this.areaactive
+                          .pipe(
+                            filter(ind=> ind !== this.lastOnEdit))
+                          .subscribe(ind => {
+                            this.indexedElements[this.lastOnEdit].focus = false;
+                            this.indexedElements[ind].focus = true;
+                            this.lastOnEdit = ind;
+                          });
+   }
+
+
 
   set areaActive(index) {
     if (this.indexesInternal.indexOf(index) !== -1) {
@@ -17,11 +34,16 @@ export class IndexProcessorService {
     this.areaactive.next(-1);
   }
 
-  addIndex(ind: number) {
+  ngOnDestroy(): void {
+    this.idexersubs.unsubscribe();
+  }
+
+  addIndex(ind: number, ref: FocusableDirective) {
     if (this.indexesInternal.indexOf(ind) !== -1) {
       throw new Error('Dublicate values in indexed area');
     }
     this.indexesInternal.push(ind);
+    this.indexedElements[ind] = ref;
   }
 
   removeIndex(ind: number) {

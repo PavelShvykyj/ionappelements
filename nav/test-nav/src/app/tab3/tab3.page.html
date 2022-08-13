@@ -52,9 +52,9 @@
       <app-indexed-area style="margin: 10px;">
         <tr *ngFor="let row of dataTable; index as i;">
             <td style="width: 50px;" *ngFor="let col of row.names; index as j;" style="margin: 2px; padding: 2px; border: 1px; min-width: 4rem;">
-              <app-indexed-element  [areaIndex]="getIndex(i,j)">
-                <app-editable-element focusfunkname = "editable"  [appFocusable]=0 [contextData]="row" [contextName]="col" ></app-editable-element>
-              </app-indexed-element>
+              <!-- <app-indexed-element  [areaIndex]="getIndex(i,j)"> -->
+                <app-editable-element focusFunkName = "editable"   [appFocusable]="getIndex(i,j)" [contextData]="row" [contextName]="col" ></app-editable-element>
+              <!-- </app-indexed-element> -->
               <!-- <input [tabindex]="getIndex(i,j)" [(ngModel)]="dataTable[i][col]"> -->
             </td>
         </tr>
