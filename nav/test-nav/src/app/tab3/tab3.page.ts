@@ -22,7 +22,7 @@ export class Tab3Page {
   list: Array<number> = [];
 
   constructor() {
-      for (let indexrow = 0; indexrow <= 9; indexrow++){
+      for (let indexrow = 0; indexrow <= 99; indexrow++){
         const row: {[key: string]: any}  = {names: []};
         for (let colindex = 0; colindex <= 9; colindex++) {
               const name = 'c'+colindex;
@@ -43,5 +43,9 @@ export class Tab3Page {
 
   getIndex(i,j) {
     return (i*10)+(j+1);
+  }
+
+  onClickTd() {
+    console.log('td clicked');
   }
 }

@@ -50,7 +50,7 @@ export class IndexedAreaComponent implements OnInit, OnDestroy
     const onAreaClick = event.path.indexOf(this.selfRef.nativeElement) !== -1;
     // ?console.log('onAreaClick ', onAreaClick);
     if (!onAreaClick) {
-      this.indexer.areaActive = -1;
+      this.indexer.areaActive = 10000;
     }
   }
 

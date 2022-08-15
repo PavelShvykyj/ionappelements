@@ -15,35 +15,34 @@ export class FocusableDirective implements OnInit, OnDestroy {
   appFocusable: number;
 
   @HostBinding('class.onedit')
-  @Input()
   onEdit = false;
 
-  @Output() customFocus: EventEmitter<any> = new EventEmitter();
+  @Output()
+  customFocus: EventEmitter<any> = new EventEmitter();
 
   focusfunk: (el: any, evetn?: EventEmitter<any>, value?: any) => void;
 
   constructor(@Inject(ElementRef) private element: ElementRef,
               @SkipSelf() private indexer: IndexProcessorService) {
-    this.focusFunkName = 'native';
+                if (this.focusfunk === undefined) {
+                  this.focusFunkName = 'native';
+                }
   }
 
-
-
   @Input()
-  set focusFunkName(name) {
-    this.focusfunk = focusfunctions[name].bind(this);
-  };
-
-
-
-  public set focus(onfocus: boolean) {
+  set focusOn(onfocus: boolean) {
     // ? console.log('DIRECTIVE focus on',this.element.nativeElement);
     this.focusfunk(this.element,this.customFocus,onfocus);
     this.onEdit = onfocus;
   }
 
+  @Input()
+  set focusFunkName(name: string) {
+    this.focusfunk = focusfunctions[name].bind(this);
+  };
+
   onClick(event) {
-    // ?console.log('onClick', event);
+    // ?console.log('onClick DIRECTIVE', event);
     this.indexer.areaActive = this.appFocusable;
   }
 

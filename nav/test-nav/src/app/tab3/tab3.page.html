@@ -1,90 +1,88 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title> Tab 3 </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <div style="background-color: brown; ">
-  <app-indexed-area style="margin: 10px; display: flex; align-items: center; justify-content: space-around;">
-    <app-indexed-element #ie10 [areaIndex]="1" >
-      <label style="margin-right: 3px; color: antiquewhite;">{{ie10.areaIndex}}</label>
-      <input [appFocusable]=0 appAutoselect>
+  <div style="background-color: brown">
+    <app-indexed-area
+      style="
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+      "
+    >
+      <label style="margin-right: 3px; color: antiquewhite">1</label>
+      <input  [appFocusable]="1" appAutoselect />
       
-    </app-indexed-element>
+      <label style="margin-right: 3px; color: antiquewhite">4</label>
+      <input focusFunkName='native' [appFocusable]="4" appAutoselect />
 
-    <app-indexed-element #ie13 [areaIndex]="3" >
-      <label style="margin-right: 3px; color: antiquewhite;">{{ie13.areaIndex}}</label>
-      <input [appFocusable]=0 appAutoselect>
-    </app-indexed-element>
-
-    <app-indexed-element #ie12 [areaIndex]="2" >
-      <label style="margin-right: 3px; color: antiquewhite;">{{ie12.areaIndex}}</label>
-      <input [appFocusable]=0 *ngIf="show" appAutoselect>
-      <ion-button [appFocusable]=0  size="small" color="medium" (click)="show = !show"> show\hide </ion-button>
-    </app-indexed-element>
-
-    <app-indexed-element style="margin-top: 4px;" [areaIndex]="4" >
-      <form>
-      <app-formcell  label="Password">
-      <ion-input
-        [appFocusable]=0
-        focusfunkname = "ionic"
-        appAutoselect
-        autocomplete="false"
-        clear-input="true"
-        inputmode="password"
-        placeholder="suPer_stro123ngPass!"
-        type="password"
+      <label style="margin-right: 3px; color: antiquewhite">2</label>
+      <input  [appFocusable]="2" *ngIf="show" appAutoselect />
+      
+      <ion-button
+        [appFocusable]="3"
+        
+        size="small"
+        color="medium"
+        (click)="show = !show"
       >
-      </ion-input>
-    </app-formcell>
-  </form>
-    </app-indexed-element>
-  </app-indexed-area>
+        show\hide
+      </ion-button>
+
+      <form style="margin-top: 4px">
+        <app-formcell label="Password">
+          <ion-input
+            [appFocusable]="5"
+            focusFunkName='ionic'
+            appAutoselect
+            autocomplete="false"
+            clear-input="true"
+            inputmode="password"
+            placeholder="suPer_stro123ngPass!"
+            type="password"
+          >
+          </ion-input>
+        </app-formcell>
+      </form>
+    </app-indexed-area>
   </div>
 
-  <div style="background-color: bisque; width: 100vw; height: 50vh; overflow: scroll;">
-  <table style="margin: 5px;">
-    <tbody>
-      <app-indexed-area style="margin: 10px;">
-        <tr *ngFor="let row of dataTable; index as i;">
-            <td style="width: 50px;" *ngFor="let col of row.names; index as j;" style="margin: 2px; padding: 2px; border: 1px; min-width: 4rem;">
+  <div
+    style="
+      background-color: bisque;
+      width: 100vw;
+      height: 50vh;
+      overflow: scroll;
+    "
+  >
+    <table style="margin: 5px">
+      <tbody>
+        <app-indexed-area style="margin: 10px">
+          <tr *ngFor="let row of dataTable; index as i;">
+            <td
+              style="width: 50px; border: 1px"
+              *ngFor="let col of row.names; index as j;"
+              style="margin: 2px; padding: 2px; border: 1px; min-width: 4rem"
+            >
               <!-- <app-indexed-element  [areaIndex]="getIndex(i,j)"> -->
-                <app-editable-element focusFunkName = "editable"   [appFocusable]="getIndex(i,j)" [contextData]="row" [contextName]="col" ></app-editable-element>
+
+              <app-editable-element
+                focusFunkName="editable"
+                [appFocusable]="getIndex(i,j)"
+                [contextData]="row"
+                [contextName]="col"
+              ></app-editable-element>
+
               <!-- </app-indexed-element> -->
               <!-- <input [tabindex]="getIndex(i,j)" [(ngModel)]="dataTable[i][col]"> -->
             </td>
-        </tr>
-      </app-indexed-area>
-    </tbody>
-</table>
-
-<!-- <app-indexed-area style="margin: 10px;">
-    <app-indexed-element  [areaIndex]="1">
-      <app-editable-element [contextData]="contextData" contextName="first" ></app-editable-element>
-    </app-indexed-element>
-
-    <app-indexed-element  [areaIndex]="2">
-      <app-editable-element [contextData]="contextData" contextName="second" ></app-editable-element>
-    </app-indexed-element>
-
-    <app-indexed-element  [areaIndex]="3">
-      <app-editable-element [contextData]="contextData" contextName="third" ></app-editable-element>
-    </app-indexed-element>
-
-    <app-indexed-element *ngFor="let item of list" [areaIndex]="item">
-      <app-editable-element [contextData]="contextData" contextName="third" ></app-editable-element>
-    </app-indexed-element>
-  </app-indexed-area> -->
-
-  <div style="padding-top: 10px;">
-    <span style="margin: 3px;">{{contextData.first}}</span>
-    <span style="margin: 3px;">{{contextData.second}}</span>
-    <span style="margin: 3px;">{{contextData.third}}</span>
-  </div>
-
-</div>
-</ion-content>
+          </tr>
+        </app-indexed-area>
+      </tbody>
+    </table>
+  </div></ion-content
+>

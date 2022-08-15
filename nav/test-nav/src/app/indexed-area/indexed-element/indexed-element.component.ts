@@ -49,18 +49,18 @@ export class IndexedElementComponent
   }
 
   ngOnInit(): void {
-    this.indexer.addIndex(this.areaIndex);
-    this.idexersubs = this.indexer.areaActiveGetter.subscribe((ind) => {
-      const nowOnEdit =  (this.areaIndex === ind);
-      const statusChanged = nowOnEdit !== this.lastOnEdit;
-      if (statusChanged) {
-        // if (nowOnEdit) {
-          // ? console.log('now change',ind,nowOnEdit);
-          setTimeout((() => this.focusInput(nowOnEdit)).bind(this));
-        // }
-        this.lastOnEdit = nowOnEdit;
-      }
-    });
+    // this.indexer.addIndex(this.areaIndex,this);
+    // this.idexersubs = this.indexer.areaActiveGetter.subscribe((ind) => {
+    //   const nowOnEdit =  (this.areaIndex === ind);
+    //   const statusChanged = nowOnEdit !== this.lastOnEdit;
+    //   if (statusChanged) {
+    //     // if (nowOnEdit) {
+    //       // ? console.log('now change',ind,nowOnEdit);
+    //       setTimeout((() => this.focusInput(nowOnEdit)).bind(this));
+    //     // }
+    //     this.lastOnEdit = nowOnEdit;
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
@@ -86,7 +86,7 @@ export class IndexedElementComponent
       // ?console.error('inputEl.length', this.directiveEl.length);
       if (this.directiveEl.length !== 0) {
         // TODO что то что сможет сфокусировать не только инпут а и мат.инпут, ионик инпут - универсально
-        this.directiveEl.get(0).focus = onFocus;
+        this.directiveEl.get(0).focusOn = onFocus;
       }
     //}
   }
